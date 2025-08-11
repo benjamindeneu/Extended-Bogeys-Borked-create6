@@ -51,6 +51,7 @@ repositories {
         content {
             includeGroup("com.tterrag.registrate")
             includeGroup("com.simibubi.create")
+            includeGroup("com.jozufozu.flywheel")
         }
     }
     maven {
@@ -69,12 +70,16 @@ dependencies {
     shadowCommon(project(path: ":common", configuration: "transformProductionForge")) { transitive = false }
 
     // Create and its dependencies
+    // Create 0.6.6 (aka 6.0.6) for 1.20.1
     modImplementation("com.simibubi.create:create-${minecraft_version}:${create_forge_version}:slim") { transitive = false }
+    // Registrate (optional; remove if you plan to rely on Create’s bundled one)
     modImplementation("com.tterrag.registrate:Registrate:${registrate_forge_version}")
+    // Flywheel 1.0.4 for 1.20.1
     modImplementation("com.jozufozu.flywheel:flywheel-forge-${flywheel_forge_minecraft_version}:${flywheel_forge_version}")
 
-    compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:0.3.5"))
-    implementation(include("io.github.llamalad7:mixinextras-forge:0.3.5"))
+    // (Optional) bump MixinExtras to match modern 1.20.1 stacks
+    compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:0.4.1"))
+    implementation(include("io.github.llamalad7:mixinextras-forge:0.4.1"))
 
 //    modImplementation("com.railwayteam.railways:Steam_Rails-forge-1.20.1:1.6.2+forge-mc1.20.1-build.1280")
 }
